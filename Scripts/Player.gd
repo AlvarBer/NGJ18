@@ -18,18 +18,12 @@ var done_dashing = false
 var collectible
 
 func _ready():
-	self.change_state(IDLE)
-	self.set_meta("is_defender", true)
 	$Tween.TweenProcessMode = $Tween.TWEEN_PROCESS_PHYSICS
 
 func _physics_process(delta):
 	# Input parsing
 	self.direction.x = float(Input.is_action_pressed("move_right")) - float(Input.is_action_pressed("move_left"))
 	self.direction.y = float(Input.is_action_pressed("move_down")) - float(Input.is_action_pressed("move_up"))
-
-	# Laura changes
-	if Input.is_action_pressed("ui_select"):
-		force_drop()
 
 	# State changes
 	var new_state = self.state
@@ -93,27 +87,6 @@ func move(delta):
 	self.speed = clamp(self.speed, 0, self.max_speed)
 	var motion = self.last_direction.normalized() * self.speed * delta
 	self.move_and_collide(motion)
-	
-func pick(col):
-	if not self.collectible:
-		self.collectible = col
-		self.collectible.get_parent().remove_child(self.collectible)
-		$PickPivot.add_child(self.collectible)
-		self.collectible.position = Vector2()
-	
-func drop(base):
-	if self.collectible:
-		$PickPivot.remove_child(self.collectible)
-		base.add_child(self.collectible)
-		self.collectible.position = Vector2()
-		self.collectible = null
-		
-func force_drop():
-	if self.collectible:
-		$PickPivot.remove_child(self.collectible)
-		get_parent().add_child(self.collectible)
-		self.collectible.position = self.position
-		self.collectible = null
 
 func _end_dash():
 	yield($Tween, "tween_completed")
