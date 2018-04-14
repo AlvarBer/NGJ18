@@ -11,7 +11,7 @@ export var dash_duration = 0.5
 enum State {IDLE, ACCELERATE, MOVE, DECELERATE, DASH}
 var state = IDLE
 var direction = Vector2()
-var last_direction = Vector2()
+var last_direction = Vector2(1, 1)
 var speed = 0
 var dash_direction
 var done_dashing = false
@@ -73,14 +73,16 @@ func change_state(new_state, delta):
 			pass
 		[_, ACCELERATE]:
 			self.speed += self.acceleration * delta
-			move(delta)
+			self.speed = clamp(self.speed, 0, self.max_speed)
+			self.move(self.last_direction, self.speed, delta)
 		[_, MOVE]:
-			move(delta)
+			self.move(self.last_direction, self.speed, delta)
 		[_, DECELERATE]:
 			self.speed -= self.deceleration * delta
-			move(delta)
+			self.speed = clamp(self.speed, 0, self.max_speed)
+			self.move(self.last_direction, self.speed, delta)
 		[DASH, DASH]:
-			self.move_and_collide(self.dash_direction.normalized() * self.speed * delta)
+			self.move(self.dash_direction.normalized(), self.speed, self.delta)
 		[_, DASH]:
 			$Tween.interpolate_property(
 				self, "speed", self.speed, self.dash_max_speed, self.dash_duration, $Tween.TRANS_BACK, $Tween.EASE_OUT
@@ -90,10 +92,12 @@ func change_state(new_state, delta):
 			self._end_dash()
 	self.state = new_state
 
-func move(delta):
-	self.speed = clamp(self.speed, 0, self.max_speed)
-	var motion = self.last_direction.normalized() * self.speed * delta
-	self.move_and_collide(motion)
+func move(direction, speed, delta):
+	var velocity = direction * speed * delta
+	var collision_info = self.move_and_collide(velocity)
+	if collision_info:
+		print(direction)
+		print(collision_info.normal)
 
 func _end_dash():
 	yield($Tween, "tween_completed")
