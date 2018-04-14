@@ -16,8 +16,11 @@ collision_mask = 1
 collision/safe_margin = 0.08
 script = ExtResource( 1 )
 acceleration = 500
-deceleration = 300
+deceleration = 400
 max_speed = 300
+dash_acceleration = 1200
+dash_max_speed = 800
+dash_duration = 0.5
 
 [node name="SpritePivot" type="Position2D" parent="." index="0"]
 
@@ -37,5 +40,14 @@ position = Vector2( 0, -20 )
 
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
+
+[node name="Tween" type="Tween" parent="." index="1"]
+
+repeat = false
+playback_process_mode = 1
+playback_speed = 1.0
+playback/active = false
+playback/repeat = false
+playback/speed = 1.0
 
 
