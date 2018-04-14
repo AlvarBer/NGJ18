@@ -5,7 +5,7 @@
 [ext_resource path="res://Scenes/Collectible.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=4]
 
-[node name="Test" type="Node" index="0"]
+[node name="Test" type="Node"]
 
 [node name="Attacker" parent="." index="0" instance=ExtResource( 1 )]
 
