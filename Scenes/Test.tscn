@@ -14,7 +14,7 @@ player_idx = 1
 
 [node name="Defender" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( 830.471, 373.199 )
+position = Vector2( 272.723, 309.632 )
 
 [node name="Collectible" parent="." index="2" instance=ExtResource( 3 )]
 
