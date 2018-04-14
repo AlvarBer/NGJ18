@@ -8,5 +8,6 @@
 modulate = Color( 1, 0.492188, 0.492188, 1 )
 script = ExtResource( 2 )
 _sections_unfolded = [ "Visibility" ]
+player_idx = 0
 
 

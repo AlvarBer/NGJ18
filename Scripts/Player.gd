@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 
+export var player_idx = 0
 export var acceleration = 500
 export var deceleration = 400
 export var max_speed = 300
@@ -22,29 +23,35 @@ func _ready():
 
 func _physics_process(delta):
 	# Input parsing
-	self.direction.x = float(Input.is_action_pressed("move_right")) - float(Input.is_action_pressed("move_left"))
-	self.direction.y = float(Input.is_action_pressed("move_down")) - float(Input.is_action_pressed("move_up"))
+	self.direction.x = (
+		float(Input.is_action_pressed("player_%d_move_right" % self.player_idx)) -
+		float(Input.is_action_pressed("player_%d_move_left" % self.player_idx))
+	)
+	self.direction.y = (
+		float(Input.is_action_pressed("player_%d_move_down" % self.player_idx)) -
+		float(Input.is_action_pressed("player_%d_move_up" % self.player_idx))
+	)
 
 	# State changes
 	var new_state = self.state
 	match self.state:
 		IDLE:
-			if Input.is_action_just_pressed("dash"):
+			if Input.is_action_just_pressed("player_%d_dash" % self.player_idx):
 				new_state = DASH
 			elif self.direction:
 				new_state = ACCELERATE
 		ACCELERATE:
-			if Input.is_action_just_pressed("dash"):
+			if Input.is_action_just_pressed("player_%d_dash" % self.player_idx):
 				new_state = DASH
 			elif speed == self.max_speed:
 				new_state = MOVE
 		MOVE:
-			if Input.is_action_just_pressed("dash"):
+			if Input.is_action_just_pressed("player_%d_dash" % self.player_idx):
 				new_state = DASH
 			elif not self.direction:
 				new_state = DECELERATE
 		DECELERATE:
-			if Input.is_action_just_pressed("dash"):
+			if Input.is_action_just_pressed("player_%d_dash" % self.player_idx):
 				new_state = DASH
 			elif not self.speed:
 				new_state = IDLE
@@ -80,7 +87,7 @@ func change_state(new_state, delta):
 			)
 			self.dash_direction = self.last_direction
 			$Tween.start()
-			_end_dash()
+			self._end_dash()
 	self.state = new_state
 
 func move(delta):
