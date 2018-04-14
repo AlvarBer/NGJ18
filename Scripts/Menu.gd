@@ -6,4 +6,4 @@ func _ready():
 
 func _on_Start_pressed():
 	print ("Pressed")
-	get_node("/root/Global").goto_scene("res://Scenes/Test.tscn")
+	get_node("/root/Global").goto_scene("res://Scenes/Match.tscn")
