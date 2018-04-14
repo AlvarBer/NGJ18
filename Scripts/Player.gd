@@ -116,7 +116,6 @@ func execute_state(new_state, delta):
 			self.done_dashing = true
 		[BOUNCE, BOUNCE]:
 			self.move(self.speed * self.bounce_direction, delta)
-			print(" Boiiing", self.done_bouncing, self.bounce_direction)
 		[_, BOUNCE]:
 			self.modulate = Color("#feffae")
 			self.done_bouncing = false

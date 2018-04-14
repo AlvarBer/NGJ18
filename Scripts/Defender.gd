@@ -17,7 +17,7 @@ func pick(col):
 		self.collectible.get_parent().remove_child(self.collectible)
 		$PickPivot.add_child(self.collectible)
 		self.collectible.position = Vector2()
-		
+
 func has_collectible():
 	if self.collectible:
 		return true
@@ -33,6 +33,11 @@ func drop(base):
 func force_drop():
 	if self.collectible:
 		$PickPivot.remove_child(self.collectible)
-		get_parent().add_child(self.collectible)
-		self.collectible.position = self.position
+		get_parent().get_node("Map").add_child(self.collectible)
+		self.collectible.position = self.position - (self.bounce_direction * 64)
+		self.collectible.enable_me()
 		self.collectible = null
+
+func on_push(speed, velocity):
+	.on_push(speed, velocity)
+	self.force_drop()
