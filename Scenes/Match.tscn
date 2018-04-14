@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Match.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Round.tscn" type="PackedScene" id=2]
+
+[node name="Match" type="Node" index="0"]
+
+script = ExtResource( 1 )
+max_rounds = 3
+
+[node name="Round" parent="." index="0" instance=ExtResource( 2 )]
+
+
