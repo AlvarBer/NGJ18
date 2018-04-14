@@ -1,6 +1,8 @@
 extends "res://Scripts/Player.gd"
 
 
+var collectible
+
 func _ready():
 	self.set_meta("is_defender", true)
 
