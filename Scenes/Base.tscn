@@ -21,6 +21,7 @@ _sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="." index="1"]
 
+editor/display_folded = true
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -32,6 +33,16 @@ audio_bus_name = "Master"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 
 shape = SubResource( 1 )
+
+[node name="Pivot0" type="Position2D" parent="." index="2"]
+
+[node name="Pivot1" type="Position2D" parent="." index="3"]
+
+position = Vector2( 0, -30 )
+
+[node name="Pivot2" type="Position2D" parent="." index="4"]
+
+position = Vector2( 0, -60 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 

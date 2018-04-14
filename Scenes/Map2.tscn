@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Collectible.tscn" type="PackedScene" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -17,7 +18,7 @@ extents = Vector2( 10, 50 )
 custom_solver_bias = 0.0
 extents = Vector2( 50, 10 )
 
-[node name="Map2" type="Node2D" index="0"]
+[node name="Map2" type="Node2D"]
 
 _sections_unfolded = [ "Transform" ]
 
@@ -197,5 +198,17 @@ position = Vector2( 70, 70 )
 [node name="PosPlayer1" type="Position2D" parent="." index="10"]
 
 position = Vector2( 920, 510 )
+
+[node name="Collectible" parent="." index="11" instance=ExtResource( 2 )]
+
+position = Vector2( 190, 140 )
+
+[node name="Collectible2" parent="." index="12" instance=ExtResource( 2 )]
+
+position = Vector2( 850, 250 )
+
+[node name="Collectible3" parent="." index="13" instance=ExtResource( 2 )]
+
+position = Vector2( 520, 520 )
 
 

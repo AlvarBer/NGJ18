@@ -17,12 +17,17 @@ func pick(col):
 		self.collectible.get_parent().remove_child(self.collectible)
 		$PickPivot.add_child(self.collectible)
 		self.collectible.position = Vector2()
+		
+func has_collectible():
+	if self.collectible:
+		return true
+	return false
 
 func drop(base):
 	if self.collectible:
 		$PickPivot.remove_child(self.collectible)
 		base.add_child(self.collectible)
-		self.collectible.position = Vector2()
+		self.collectible.position = base.get_pivot()
 		self.collectible = null
 
 func force_drop():

@@ -23,6 +23,7 @@ var winner
 
 var start_timer
 var finish_timer
+var pre_finish_timer
 
 func _ready():
 	self.start_timer = $StartTimer
@@ -35,6 +36,11 @@ func _ready():
 	self.finish_timer.set_wait_time(2)
 	self.finish_timer.connect("timeout", self, "on_finish_timer_timeout")
 	
+	self.pre_finish_timer = $PreFinishTimer
+	self.pre_finish_timer.one_shot = true
+	self.pre_finish_timer.set_wait_time(2)
+	self.pre_finish_timer.connect("timeout", self, "on_pre_finish_timer_timeout")
+	
 	$Start.visible = false
 	$Finish.visible = false
 
@@ -44,8 +50,6 @@ func _process(delta):
 		
 		if self.time < 0:
 			self.finish_round(self.attacker.player_idx)
-			
-			$Time.visible = false
 		else:
 			$Time.visible = true
 			$Time.text = str(self.time).pad_decimals(2)
@@ -68,15 +72,13 @@ func finish_round(winner):
 	print("Finish Round")
 	self.winner = winner 
 	self.state = PREPARATION
-	self.remove_child(map)
-	self.remove_child(defender)
-	self.remove_child(attacker)
+	$Time.visible = false
 	
-	$Finish.visible = true
-	$Finish/Winner/Player.text = "Player %d" % (winner + 1)
+	self.pre_finish_timer.start()
 	
-	self.finish_timer.start()
-	
+
+func base_completed():
+	self.finish_round(self.defender.player_idx)
 	
 func on_start_timer_timeout():
 	var random_idx = randi() % len(self.map_scenes)
@@ -101,3 +103,16 @@ func on_finish_timer_timeout():
 	self.get_parent().finish_round(self.winner)
 	
 	$Finish.visible = false;
+	
+func on_pre_finish_timer_timeout():
+	self.remove_child(map)
+	self.remove_child(defender)
+	self.remove_child(attacker)
+	
+	$Finish.visible = true
+	$Finish/Winner/Player.text = "Player %d" % (winner + 1)
+	
+	self.finish_timer.start()
+	
+func is_running():
+	return self.state == State.RUNNING

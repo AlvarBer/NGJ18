@@ -1,6 +1,7 @@
 extends Node
 
 export var max_rounds = 3
+export var round_duration = 10
 
 var players_points = [0, 0]
 var rounds = 0
@@ -36,7 +37,7 @@ func start_round(first_round):
 		var tmp = self.defender_idx
 		self.defender_idx = self.attacker_idx
 		self.attacker_idx = tmp
-	$Round.start_round(5, rounds, defender_idx, attacker_idx)
+	$Round.start_round(round_duration, rounds, defender_idx, attacker_idx)
 	
 func finish_round(winner):
 	self.players_points[winner] += 1

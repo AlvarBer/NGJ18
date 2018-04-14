@@ -48,7 +48,14 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="Start" type="TextureRect" parent="." index="3"]
+[node name="PreFinishTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="Start" type="TextureRect" parent="." index="4"]
 
 editor/display_folded = true
 visible = false
@@ -176,7 +183,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Visibility" ]
 
-[node name="Finish" type="TextureRect" parent="." index="4"]
+[node name="Finish" type="TextureRect" parent="." index="5"]
 
 visible = false
 anchor_left = 0.0
