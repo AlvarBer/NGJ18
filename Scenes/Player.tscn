@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
+[ext_resource path="res://Graphics/blank.png" type="Texture" id=2]
 
-[node name="Player" type="KinematicBody2D" index="0"]
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 25, 25 )
+
+[node name="Player" type="KinematicBody2D"]
 
 input_pickable = false
 collision_layer = 1
@@ -13,17 +19,23 @@ acceleration = 500
 deceleration = 300
 max_speed = 300
 
-[node name="ColorRect" type="ColorRect" parent="." index="0"]
+[node name="SpritePivot" type="Position2D" parent="." index="0"]
 
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_pivot_offset = Vector2( 0, 0 )
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-color = Color( 1, 1, 1, 1 )
+editor/display_folded = true
+
+[node name="Sprite" type="Sprite" parent="SpritePivot" index="0"]
+
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PickPivot" type="Position2D" parent="." index="1"]
+
+position = Vector2( 0, -20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
+
+shape = SubResource( 1 )
+_sections_unfolded = [ "Transform" ]
 
 

@@ -10,8 +10,11 @@ var direction = Vector2()
 var last_direction = Vector2()
 var speed = 0
 
+var collectible
+
 func _ready():
 	self.change_state(IDLE)
+	self.set_meta("is_defender", true)
 
 func _process(delta):
 	if self.direction:
@@ -26,13 +29,16 @@ func _process(delta):
 		self.change_state(IDLE)
 			
 	self.move(delta)
+	
+	if Input.is_action_pressed("ui_select"):
+		force_drop()
 
 func change_state(new_state):
 	match new_state:
 		IDLE:
-			print("Idling")
+			pass
 		MOVE:
-			print("Moving")
+			pass
 	self.state = new_state
 
 func move(delta):
@@ -44,3 +50,24 @@ func move(delta):
 		
 	var motion = self.last_direction.normalized() * self.speed * delta
 	move_and_collide(motion)
+	
+func pick(col):
+	if not self.collectible:
+		self.collectible = col
+		self.collectible.get_parent().remove_child(self.collectible)
+		$PickPivot.add_child(self.collectible)
+		self.collectible.position = Vector2()
+	
+func drop(base):
+	if self.collectible:
+		$PickPivot.remove_child(self.collectible)
+		base.add_child(self.collectible)
+		self.collectible.position = Vector2()
+		self.collectible = null
+		
+func force_drop():
+	if self.collectible:
+		$PickPivot.remove_child(self.collectible)
+		get_parent().add_child(self.collectible)
+		self.collectible.position = self.position
+		self.collectible = null
