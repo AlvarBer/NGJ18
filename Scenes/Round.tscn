@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Round.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Map1.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Map2.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Map3.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Defender.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Attacker.tscn" type="PackedScene" id=6]
 
 [node name="Round" type="Node"]
 
 script = ExtResource( 1 )
 maps = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+defender = ExtResource( 5 )
+attacker = ExtResource( 6 )
 
 
