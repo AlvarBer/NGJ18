@@ -42,7 +42,7 @@ func start_round(first_round):
 func finish_round(winner):
 	self.players_points[winner] += 1
 	self.rounds += 1
-	
+
 	if self.players_points[winner] > self.max_rounds / 2:
 		self.force_finish_match(winner)
 	elif self.rounds < self.max_rounds:

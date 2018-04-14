@@ -5,8 +5,8 @@ export var player_idx = 0
 export var acceleration = 500
 export var deceleration = 800
 export var max_speed = 300
-export var dash_max_speed = 800
-export var dash_duration = 0.5
+export var dash_max_speed = 1000
+export var dash_duration = 0.3
 enum State {IDLE, ACCELERATE, MOVE, DECELERATE, DASH, BOUNCE}
 var state = IDLE
 var direction = Vector2()
@@ -84,7 +84,9 @@ func _physics_process(delta):
 		self.last_direction = self.direction
 
 func execute_state(new_state, delta):
-	match [self.state, new_state]:
+	var old_state = self.state
+	self.state = new_state
+	match [old_state, new_state]:
 		[_, IDLE]:
 			self.modulate = Color("#7d7d7d")
 		[_, ACCELERATE]:
@@ -109,31 +111,36 @@ func execute_state(new_state, delta):
 			)
 			self.dash_direction = self.last_direction
 			$Tween.start()
-			self._end_dash()
-			self.modulate = Color("#2b2b2b")
+			self.modulate = Color("#be77ff")
+			yield($Tween, "tween_completed")
+			self.done_dashing = true
 		[BOUNCE, BOUNCE]:
 			self.move(self.speed * self.bounce_direction, delta)
+			print(" Boiiing", self.done_bouncing, self.bounce_direction)
 		[_, BOUNCE]:
+			self.modulate = Color("#feffae")
 			self.done_bouncing = false
-			$Tween.stop_all()
+			$Tween.stop(self)
 			$Tween.interpolate_property(
 				self, "speed", self.speed, 0, self.bounce_duration, $Tween.TRANS_LINEAR, $Tween.EASE_IN_OUT
 			)
 			$Tween.start()
-			self._end_bounce()
-	self.state = new_state
+			yield($Tween, "tween_completed")
+			self.done_bouncing = true
+			self.bounce_direction = null
 
 func move(velocity, delta):
 	var collision_info = self.move_and_collide(velocity * delta)
 	if collision_info:
-		self.bounce_direction = velocity.bounce(collision_info.normal).normalized()
+		if collision_info.collider is KinematicBody2D:  # Clash between players
+			self.on_push(collision_info.collider_velocity.length(), velocity.bounce(collision_info.normal).normalized())
+			collision_info.collider.on_push((collision_info.remainder / delta).length(), -collision_info.normal)
+		else:
+			self.bounce_direction = (collision_info.remainder / delta).bounce(collision_info.normal).normalized()
 	return collision_info
 
-func _end_dash():
-	yield($Tween, "tween_completed")
-	self.done_dashing = true
-
-func _end_bounce():
-	yield($Tween, "tween_completed")
-	self.done_bouncing = true
-	self.bounce_direction = null
+func on_push(speed, direction):
+	$Tween.stop(self)
+	self.bounce_direction = direction
+	self.speed = speed
+	self.state = IDLE  # HACK: prevents eternal bounces
