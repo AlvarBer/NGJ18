@@ -5,16 +5,18 @@
 [ext_resource path="res://Scenes/Collectible.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=4]
 
-[node name="Test" type="Node"]
+[node name="Test" type="Node" index="0"]
 
 [node name="Attacker" parent="." index="0" instance=ExtResource( 1 )]
 
 position = Vector2( 442.918, 178.398 )
 player_idx = 1
+dash_max_speed = 1000
 
 [node name="Defender" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 272.723, 309.632 )
+dash_max_speed = 1000
 
 [node name="Collectible" parent="." index="2" instance=ExtResource( 3 )]
 

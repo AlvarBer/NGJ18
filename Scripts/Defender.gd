@@ -38,6 +38,6 @@ func force_drop():
 		self.collectible.enable_me()
 		self.collectible = null
 
-func on_push(speed, velocity):
-	.on_push(speed, velocity)
+func on_push(speed, velocity, factor):
+	.on_push(speed, velocity, factor)
 	self.force_drop()

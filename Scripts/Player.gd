@@ -7,6 +7,8 @@ export var deceleration = 800
 export var max_speed = 300
 export var dash_max_speed = 1000
 export var dash_duration = 0.3
+export var bounce_duration = 0.3
+export var dashed_factor = 2
 enum State {IDLE, ACCELERATE, MOVE, DECELERATE, DASH, BOUNCE}
 var state = IDLE
 var direction = Vector2()
@@ -16,7 +18,6 @@ var dash_direction
 var done_dashing = false
 var bounce_direction
 var done_bouncing = false
-var bounce_duration = 0.3
 
 func _ready():
 	$Tween.TweenProcessMode = $Tween.TWEEN_PROCESS_PHYSICS
@@ -132,14 +133,27 @@ func move(velocity, delta):
 	var collision_info = self.move_and_collide(velocity * delta)
 	if collision_info:
 		if collision_info.collider is KinematicBody2D:  # Clash between players
-			self.on_push(collision_info.collider_velocity.length(), velocity.bounce(collision_info.normal).normalized())
-			collision_info.collider.on_push((collision_info.remainder / delta).length(), -collision_info.normal)
+			var self_factor = 1
+			var collider_factor = 1
+			match [self.state, collision_info.collider.state]:
+				[DASH, DASH]:
+					pass
+				[DASH, _]:
+					collider_factor = self.dashed_factor
+				[_, DASH]:
+					self_factor = self.dashed_factor
+			self.on_push(collision_info.collider_velocity.length(), velocity.bounce(collision_info.normal).normalized(), self_factor)
+			collision_info.collider.on_push((collision_info.remainder / delta).length(), -collision_info.normal, collider_factor)
 		else:
-			self.bounce_direction = (collision_info.remainder / delta).bounce(collision_info.normal).normalized()
+			self.bounce_direction = velocity.bounce(collision_info.normal).normalized()
 	return collision_info
 
-func on_push(speed, direction):
+func on_push(speed, direction, factor=1):
 	$Tween.stop(self)
 	self.bounce_direction = direction
-	self.speed = speed
+	if factor != 1:
+		print(speed)
+	self.speed = speed * factor
+	if factor != 1:
+		print(self.speed)
 	self.state = IDLE  # HACK: prevents eternal bounces
