@@ -19,7 +19,7 @@ modulate = Color( 1, 0.269531, 0.269531, 1 )
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
 region_enabled = true
-region_rect = Rect2( 472.572, 638, 382, 284 )
+region_rect = Rect2( 886.572, 336, 290, 286 )
 _sections_unfolded = [ "Region", "Transform", "Visibility" ]
 
 [node name="Area2D" type="Area2D" parent="." index="1"]

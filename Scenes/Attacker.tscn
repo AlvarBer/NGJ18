@@ -7,7 +7,9 @@
 
 modulate = Color( 1, 0.492188, 0.492188, 1 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Visibility" ]
-player_idx = 0
+
+[node name="Sprite" parent="SpritePivot" index="0"]
+
+region_rect = Rect2( 1321.17, 629.424, 196, 302.11 )
 
 

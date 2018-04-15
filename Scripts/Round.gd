@@ -3,9 +3,7 @@ extends Node
 enum State { PREPARATION, RUNNING }
 
 export var map_scenes = [
-	preload("res://Scenes/Map1.tscn"),
-	preload("res://Scenes/Map2.tscn"),
-	preload("res://Scenes/Map3.tscn")
+	preload("res://Scenes/Map4.tscn"),
 ]
 
 export var defender_scene = preload("res://Scenes/Defender.tscn")

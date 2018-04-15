@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
-[ext_resource path="res://Graphics/blank.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Asets.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="CapsuleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 35.2948
+radius = 19.3793
+height = 20.0
 
 [node name="Player" type="KinematicBody2D"]
 
@@ -29,8 +30,10 @@ dashed_factor = 2
 
 [node name="Sprite" type="Sprite" parent="SpritePivot" index="0"]
 
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 1081.14, 632, 172, 300 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
 [node name="Tween" type="Tween" parent="." index="1"]
@@ -48,6 +51,7 @@ position = Vector2( 0, -20 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="3"]
 
+position = Vector2( 1.46301, 9.26578 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 

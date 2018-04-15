@@ -1,11 +1,9 @@
 extends Node2D
 
 
-
-
 func _on_Area2D_body_entered(body):
 	if body is KinematicBody2D:
-		if body.get_meta("is_defender"):
+		if body.get_meta("is_defender") and not body.has_collectible():
 			var can_pick = get_parent().get_parent().is_running()
 			if can_pick:
 				$Area2D/CollisionShape2D.disabled = true

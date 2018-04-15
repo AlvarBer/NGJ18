@@ -3,7 +3,7 @@ extends KinematicBody2D
 
 export var player_idx = 0
 export var acceleration = 500
-export var deceleration = 800
+export var deceleration = 1000
 export var max_speed = 300
 export var dash_max_speed = 1000
 export var dash_duration = 0.3
@@ -151,9 +151,5 @@ func move(velocity, delta):
 func on_push(speed, direction, factor=1):
 	$Tween.stop(self)
 	self.bounce_direction = direction
-	if factor != 1:
-		print(speed)
 	self.speed = speed * factor
-	if factor != 1:
-		print(self.speed)
 	self.state = IDLE  # HACK: prevents eternal bounces
