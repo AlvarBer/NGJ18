@@ -77,7 +77,7 @@ func _physics_process(delta):
 					new_state = IDLE
 			BOUNCE:
 				if self.done_bouncing:
-					new_state = IDLE
+					new_state = ACCELERATE
 	self.execute_state(new_state, delta)
 
 	# Save direction if it has changed
@@ -122,7 +122,7 @@ func execute_state(new_state, delta):
 			self.done_bouncing = false
 			$Tween.stop(self)
 			$Tween.interpolate_property(
-				self, "speed", self.speed, 0, self.bounce_duration, $Tween.TRANS_LINEAR, $Tween.EASE_IN_OUT
+				self, "speed", self.speed, 100, self.bounce_duration, $Tween.TRANS_LINEAR, $Tween.EASE_IN_OUT
 			)
 			$Tween.start()
 			yield($Tween, "tween_completed")

@@ -4,6 +4,8 @@ enum State { PREPARATION, RUNNING }
 
 export var map_scenes = [
 	preload("res://Scenes/Map4.tscn"),
+	preload("res://Scenes/Map5.tscn"),
+	preload("res://Scenes/Map6.tscn"),
 ]
 
 export var defender_scene = preload("res://Scenes/Defender.tscn")

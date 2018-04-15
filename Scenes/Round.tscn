@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/Round.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Map1.tscn" type="PackedScene" id=2]
@@ -6,7 +6,8 @@
 [ext_resource path="res://Scenes/Map3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Defender.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Attacker.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Graphics/blank.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/background.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/blank.png" type="Texture" id=8]
 
 [node name="Round" type="Node"]
 
@@ -15,25 +16,12 @@ map_scenes = [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
 defender_scene = ExtResource( 5 )
 attacker_scene = ExtResource( 6 )
 
-[node name="Time" type="Label" parent="." index="0"]
+[node name="background" type="Sprite" parent="." index="0"]
 
-anchor_left = 0.5
-anchor_top = 0.0
-anchor_right = 0.5
-anchor_bottom = 0.0
-margin_left = -50.0
-margin_right = 50.0
-margin_bottom = 50.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Rect" ]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 7 )
+centered = false
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="StartTimer" type="Timer" parent="." index="1"]
 
@@ -70,7 +58,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 0
 
@@ -192,6 +180,7 @@ _sections_unfolded = [ "Visibility" ]
 
 [node name="Finish" type="TextureRect" parent="." index="5"]
 
+editor/display_folded = true
 visible = false
 anchor_left = 0.0
 anchor_top = 0.0
@@ -203,7 +192,7 @@ mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 expand = true
 stretch_mode = 0
 
@@ -251,5 +240,28 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Visibility" ]
+
+[node name="Time" type="Label" parent="." index="6"]
+
+modulate = Color( 0, 0, 0, 1 )
+anchor_left = 0.5
+anchor_top = 0.0
+anchor_right = 0.5
+anchor_bottom = 0.0
+margin_left = -50.0
+margin_right = 50.0
+margin_bottom = 50.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+align = 1
+valign = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+_sections_unfolded = [ "Anchor", "Margin", "Rect", "Visibility", "custom_colors", "custom_fonts" ]
 
 

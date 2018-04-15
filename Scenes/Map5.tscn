@@ -6,12 +6,12 @@
 [ext_resource path="res://Scenes/Collectible_3.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Graphics/walls.png" type="Texture" id=5]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 300, 14 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 512, 16 )
@@ -35,7 +35,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft2" index="0"]
 
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="WallBottom" type="StaticBody2D" parent="." index="1"]
@@ -52,7 +52,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallBottom" index="0"]
 
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="WallTop" type="StaticBody2D" parent="." index="2"]
@@ -69,7 +69,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallTop" index="0"]
 
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="WallRight" type="StaticBody2D" parent="." index="3"]
@@ -87,7 +87,7 @@ _sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight" index="0"]
 
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Base" parent="." index="4" instance=ExtResource( 1 )]
@@ -105,31 +105,34 @@ position = Vector2( 900, 500 )
 
 [node name="Collectible" parent="." index="7" instance=ExtResource( 2 )]
 
-position = Vector2( 503.492, 71.2875 )
+position = Vector2( 123.948, 105.297 )
 
 [node name="Collectible2" parent="." index="8" instance=ExtResource( 3 )]
 
-position = Vector2( 109.373, 313.826 )
+position = Vector2( 899.749, 406.331 )
 
 [node name="Collectible3" parent="." index="9" instance=ExtResource( 4 )]
 
-position = Vector2( 941.424, 310.812 )
+position = Vector2( 137.444, 489.021 )
 
 [node name="Up" type="Position2D" parent="." index="10"]
 
-position = Vector2( 606.07, 192.024 )
+position = Vector2( 327.278, 220.321 )
+rotation = 1.5708
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
 
 [node name="Upper Wall" type="Sprite" parent="Up" index="0"]
 
-position = Vector2( -87.5824, 10.8841 )
-scale = Vector2( 0.446684, 0.507826 )
+position = Vector2( 7.37494, 10.8841 )
+rotation = -2.53073
+scale = Vector2( 0.7, 0.7 )
 texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 484, 608.788, 476, 150.38 )
-_sections_unfolded = [ "Region", "Transform" ]
+region_rect = Rect2( 504, 280.04, 442, 188.142 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Up/Upper Wall" index="0"]
 
@@ -144,12 +147,12 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Up/Upper Wall/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( 228.889, 60.2802, 99.3234, 31.9838, -14.6657, 17.8356, -126.531, 27.2677, -229.192, 47.311, -232.024, -36.3992, -129.363, -59.9796, -8.29364, -67.0537, 100.739, -63.5167, 229.597, -29.3252 )
+polygon = PoolVector2Array( -1.66296, 40.768, -61.3677, 41.5508, -131.82, 81.909, -146.101, 81.6529, -213.646, 7.16058, -209.089, -10.1321, -113.345, -65.6351, -45.0401, -85.2597, 33.6777, -82.69, 134.68, -61.1109, 195.335, -33.0738, 217.19, -7.354, 216.59, 4.60425, 153.282, 77.1365, 131.517, 80.8389, 51.7623, 45.6641 )
 
 [node name="Down" type="Position2D" parent="." index="11"]
 
-position = Vector2( 603.349, 402.882 )
-scale = Vector2( 1, -1 )
+position = Vector2( 792.525, 280.177 )
+rotation = 1.5708
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
@@ -157,12 +160,13 @@ __meta__ = {
 
 [node name="Upper Wall" type="Sprite" parent="Down" index="0"]
 
-position = Vector2( -87.5824, 10.8841 )
-scale = Vector2( 0.446684, 0.507826 )
+position = Vector2( 42.2214, 60.0271 )
+rotation = 5.23599
+scale = Vector2( 0.443512, 0.525639 )
 texture = ExtResource( 5 )
 region_enabled = true
-region_rect = Rect2( 484, 608.788, 476, 150.38 )
-_sections_unfolded = [ "Region", "Transform" ]
+region_rect = Rect2( 168, 270.182, 196, 628 )
+_sections_unfolded = [ "Offset", "Region", "Transform" ]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Down/Upper Wall" index="0"]
 
@@ -177,73 +181,6 @@ bounce = 0.0
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Down/Upper Wall/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( 228.889, 60.2802, 99.3234, 31.9838, -14.6657, 17.8356, -126.531, 27.2677, -229.192, 47.311, -232.024, -36.3992, -129.363, -59.9796, -8.29364, -67.0537, 100.739, -63.5167, 229.597, -29.3252 )
-
-[node name="Left" type="Position2D" parent="." index="12"]
-
-position = Vector2( 251.27, 298.335 )
-_sections_unfolded = [ "Transform", "Z Index" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Upper Wall" type="Sprite" parent="Left" index="0"]
-
-position = Vector2( 1e-06, 0 )
-rotation = -1.5708
-scale = Vector2( 0.567035, 0.391329 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 484, 608.788, 476, 150.38 )
-_sections_unfolded = [ "Region", "Transform" ]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Left/Upper Wall" index="0"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Left/Upper Wall/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( 228.889, 60.2802, 99.3234, 31.9838, -14.6657, 17.8356, -126.531, 27.2677, -229.192, 47.311, -232.024, -36.3992, -129.363, -59.9796, -8.29364, -67.0537, 100.739, -63.5167, 229.597, -29.3252 )
-
-[node name="Right" type="Position2D" parent="." index="13"]
-
-position = Vector2( 792.871, 303.887 )
-scale = Vector2( -1, 1 )
-_sections_unfolded = [ "Transform", "Z Index" ]
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Upper Wall" type="Sprite" parent="Right" index="0"]
-
-position = Vector2( 1e-06, 0 )
-rotation = -1.5708
-scale = Vector2( 0.567035, 0.391329 )
-texture = ExtResource( 5 )
-region_enabled = true
-region_rect = Rect2( 484, 608.788, 476, 150.38 )
-_sections_unfolded = [ "Region", "Transform" ]
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Right/Upper Wall" index="0"]
-
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Right/Upper Wall/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( 228.889, 60.2802, 99.3234, 31.9838, -14.6657, 17.8356, -126.531, 27.2677, -229.192, 47.311, -232.024, -36.3992, -129.363, -59.9796, -8.29364, -67.0537, 100.739, -63.5167, 229.597, -29.3252 )
+polygon = PoolVector2Array( 80.0684, 302.486, 66.3213, 307.569, -64.8773, 300.43, -78.7437, 282.962, -80.7892, -298.991, 68.2406, -302.153, 85.5842, -287.995 )
 
 

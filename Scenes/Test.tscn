@@ -19,12 +19,20 @@ _sections_unfolded = [ "Animation", "Offset", "Transform" ]
 
 position = Vector2( 442.918, 178.398 )
 player_idx = 1
+acceleration = 500
+deceleration = 400
+max_speed = 300
 dash_max_speed = 1000
+dash_duration = 0.3
 
 [node name="Defender" parent="." index="2" instance=ExtResource( 3 )]
 
 position = Vector2( 272.723, 309.632 )
+acceleration = 500
+deceleration = 400
+max_speed = 300
 dash_max_speed = 1000
+dash_duration = 0.3
 
 [node name="Collectible" parent="." index="3" instance=ExtResource( 4 )]
 
