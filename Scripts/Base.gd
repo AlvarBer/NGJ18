@@ -13,6 +13,6 @@ func _on_Area2D_body_entered( body ):
 			if body.has_collectible():
 				body.drop(self)
 				pieces += 1
-				
+
 				if pieces == total_pieces:
 					get_parent().get_parent().base_completed()
