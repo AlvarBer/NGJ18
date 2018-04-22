@@ -41,11 +41,11 @@ shape = SubResource( 1 )
 
 [node name="Pivot1" type="Position2D" parent="." index="3"]
 
-position = Vector2( 0, -30 )
+position = Vector2( 0, -70 )
 
 [node name="Pivot2" type="Position2D" parent="." index="4"]
 
-position = Vector2( 0, -60 )
+position = Vector2( 0, -140 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 
