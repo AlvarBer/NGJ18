@@ -4,10 +4,11 @@ enum State {IDLE, ACCELERATE, DECELERATE}
 export var player_idx = 0
 export var max_speed = 500
 export var acceleration = 75
-export var deceleration = 0.3
+export var deceleration = 0.5
 var state = IDLE
 var velocity = Vector2()
 var input_direction = Vector2()
+
 
 func _process(delta):
 	if input_direction:
@@ -46,6 +47,9 @@ func st_machine(input_direction):
 			if not input_direction:
 				state = DECELERATE
 		DECELERATE:
+			# Clamp on max_speed * input ?
+			# var signs = Vector2(sign(velocity.x), sign(velocity.y))
+			# velocity = (velocity.abs() - Vector2(deceleration, deceleration)) * signs
 			velocity *= deceleration
 			move_and_slide(velocity)
 			if input_direction:
