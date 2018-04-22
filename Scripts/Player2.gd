@@ -7,12 +7,16 @@ export var acceleration = 75
 export var deceleration = 0.3
 var state = IDLE
 var velocity = Vector2()
+var input_direction = Vector2()
+
+func _process(delta):
+	if input_direction:
+		$CircleArrowPivot.rotation_degrees = input_direction.angle() * (180 / PI)
 
 func _physics_process(delta):
 	st_machine(get_input_direction())
 
 func get_input_direction():
-	var input_direction = Vector2()
 	if len(Input.get_connected_joypads()) > player_idx:
 		input_direction = Vector2(
 			Input.get_joy_axis(player_idx, JOY_AXIS_0),
