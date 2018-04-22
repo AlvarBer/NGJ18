@@ -4,7 +4,7 @@ enum State {IDLE, ACCELERATE, DECELERATE}
 export var player_idx = 0
 export var max_speed = 500
 export var acceleration = 75
-export var deceleration = 0.5
+export var deceleration = 0.1
 var state = IDLE
 var velocity = Vector2()
 var input_direction = Vector2()
