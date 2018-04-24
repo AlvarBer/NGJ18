@@ -1,24 +1,79 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scripts/Menu.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/background.png" type="Texture" id=2]
 [ext_resource path="res://Graphics/button_start.png" type="Texture" id=3]
 [ext_resource path="res://Graphics/button_start_pressed.png" type="Texture" id=4]
-[ext_resource path="res://Graphics/cover.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/title_1.png" type="Texture" id=5]
+[ext_resource path="res://Graphics/title_2.png" type="Texture" id=6]
+[ext_resource path="res://Graphics/title_3.png" type="Texture" id=7]
+[ext_resource path="res://Graphics/cover.png" type="Texture" id=8]
+[ext_resource path="res://Graphics/texts_3.png" type="Texture" id=9]
+[ext_resource path="res://Graphics/texts_1.png" type="Texture" id=10]
+[ext_resource path="res://Graphics/texts_2.png" type="Texture" id=11]
 
-[node name="Menu" type="Node"]
+[sub_resource type="Animation" id=1]
+
+resource_name = "title_idle"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+resource_name = "credits_idle"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite2:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 9 ) ]
+}
+
+[node name="Menu" type="Node" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Focus" ]
 
-[node name="TextureRect" type="TextureRect" parent="." index="0"]
+[node name="Background" type="TextureRect" parent="." index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 1
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
@@ -38,7 +93,6 @@ margin_top = 450.0
 margin_right = 860.0
 margin_bottom = 550.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 focus_mode = 2
 mouse_filter = 0
 mouse_default_cursor_shape = 0
@@ -55,21 +109,63 @@ _sections_unfolded = [ "Rect", "Textures" ]
 
 [node name="Title" type="Sprite" parent="." index="2"]
 
-position = Vector2( 710, 250 )
+editor/display_folded = true
+position = Vector2( 720, 240 )
 scale = Vector2( 0.347953, 0.399123 )
 texture = ExtResource( 5 )
 region_enabled = true
 region_rect = Rect2( 1064, 167.604, 684, 912.396 )
 _sections_unfolded = [ "Region" ]
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Title" index="0"]
+
+root_node = NodePath("..")
+autoplay = "title_idle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/title_idle = SubResource( 1 )
+blend_times = [  ]
+
 [node name="Cats" type="Sprite" parent="." index="3"]
 
+visible = false
 position = Vector2( 270, 305 )
 scale = Vector2( 0.552147, 0.553047 )
-texture = ExtResource( 5 )
+texture = ExtResource( 8 )
 region_enabled = true
 region_rect = Rect2( 196, 151.604, 652, 886.14 )
 _sections_unfolded = [ "Region" ]
+
+[node name="Credits" type="Node2D" parent="." index="4"]
+
+[node name="Sprite" type="Sprite" parent="Credits" index="0"]
+
+position = Vector2( 160, 540 )
+scale = Vector2( 0.323529, 0.323529 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 1228, -8, 748, 216 )
+_sections_unfolded = [ "Region" ]
+
+[node name="Sprite2" type="Sprite" parent="Credits" index="1"]
+
+position = Vector2( 870, 550 )
+scale = Vector2( 0.301282, 0.301282 )
+texture = ExtResource( 9 )
+region_enabled = true
+region_rect = Rect2( 1224, 208, 780, 192 )
+_sections_unfolded = [ "Region" ]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Credits" index="2"]
+
+root_node = NodePath("..")
+autoplay = "credits_idle"
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/credits_idle = SubResource( 2 )
+blend_times = [  ]
 
 [connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
 
