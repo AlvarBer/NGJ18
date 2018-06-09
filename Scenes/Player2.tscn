@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Scripts/Player2.gd" type="Script" id=1]
 [ext_resource path="res://Graphics/Circle.png" type="Texture" id=2]
-[ext_resource path="res://Graphics/Asets.png" type="Texture" id=3]
-[ext_resource path="res://Graphics/Circle Arrow.png" type="Texture" id=4]
+[ext_resource path="res://Graphics/defender_body.png" type="Texture" id=3]
+[ext_resource path="res://Graphics/defender_head.png" type="Texture" id=4]
+[ext_resource path="res://Graphics/Circle Arrow.png" type="Texture" id=5]
 
 [sub_resource type="Curve" id=1]
 
@@ -65,7 +66,7 @@ custom_solver_bias = 0.0
 radius = 19.3793
 height = 20.0
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" index="0"]
 
 input_pickable = false
 collision_layer = 1
@@ -76,7 +77,7 @@ _sections_unfolded = [ "Visibility" ]
 player_idx = 0
 max_speed = 500
 acceleration = 200
-deceleration = 0.5
+deceleration = 0.1
 
 [node name="Particles2D" type="Particles2D" parent="." index="0"]
 
@@ -103,11 +104,17 @@ _sections_unfolded = [ "Drawing", "Process Material", "Textures", "Time", "Trans
 
 [node name="SpritePivot" type="Position2D" parent="." index="1"]
 
-[node name="Sprite" type="Sprite" parent="SpritePivot" index="0"]
+[node name="Body" type="Sprite" parent="SpritePivot" index="0"]
 
 scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 3 )
-region_enabled = true
+region_rect = Rect2( 1081.14, 632, 172, 300 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
+
+[node name="Head" type="Sprite" parent="SpritePivot" index="1"]
+
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 4 )
 region_rect = Rect2( 1081.14, 632, 172, 300 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility" ]
 
@@ -138,7 +145,7 @@ _sections_unfolded = [ "Transform" ]
 [node name="Sprite" type="Sprite" parent="CircleArrowPivot" index="0"]
 
 position = Vector2( 45, 0 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 _sections_unfolded = [ "Transform" ]
 
 

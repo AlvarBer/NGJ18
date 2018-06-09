@@ -18,7 +18,7 @@ extents = Vector2( 300, 14 )
 custom_solver_bias = 0.0
 extents = Vector2( 512, 16 )
 
-[node name="Map" type="Node2D" index="0"]
+[node name="Map" type="Node2D"]
 
 _sections_unfolded = [ "Transform" ]
 
